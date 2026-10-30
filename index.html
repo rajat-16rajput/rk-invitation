@@ -1173,18 +1173,9 @@
       <div class="intro-line" aria-hidden="true"></div>
       <p class="intro-sub">Tap to open</p>
     </div>
-    <script>
-      document.getElementById("intro").addEventListener("click", function () {
-        if (this.classList.contains("exit") || this.classList.contains("done"))
-          return;
-        this.classList.add("exit");
-        var intro = this;
-        setTimeout(function () {
-          intro.classList.add("done");
-          document.body.classList.remove("locked");
-        }, 700);
-      });
-    </script>
+    <audio id="bgMusic" loop preload="auto">
+      <source src="./flute.mp3" type="audio/mpeg" />
+    </audio>
 
     <div class="rotate-hint" role="status">
       Please turn your phone to portrait for the best view
@@ -1306,18 +1297,31 @@
       ).matches;
 
       // ---------- Opening screen ----------
+      const bgMusic = document.getElementById("bgMusic");
+
       function closeIntro() {
         if (
           intro.classList.contains("done") ||
           intro.classList.contains("exit")
         )
           return;
+
+        // Start background music on user's tap
+        bgMusic.volume = 0.45;
+
+        bgMusic.play().catch((error) => {
+          console.log("Music playback failed:", error);
+        });
+
+        // Close the opening screen
         intro.classList.add("exit");
+
         setTimeout(() => {
           intro.classList.add("done");
           document.body.classList.remove("locked");
         }, 700);
       }
+
       intro.addEventListener("click", closeIntro);
 
       // ---------- Scroll reveal ----------
