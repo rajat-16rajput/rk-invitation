@@ -1318,6 +1318,110 @@
       footer p {
         margin: 0;
       }
+
+      /* ---------- Elegant golden tap interaction ---------- */
+
+      /* Remove default blue tap highlight */
+      * {
+        -webkit-tap-highlight-color: transparent;
+        tap-highlight-color: transparent;
+      }
+      */
+
+      /* Opening screen: soft golden response on tap */
+      /* #intro {
+        -webkit-tap-highlight-color: transparent;
+        transition:
+          opacity 1.2s ease,
+          visibility 1.2s ease;
+      }
+
+      #intro:active .intro-mono {
+        filter: drop-shadow(0 0 14px rgba(246, 224, 138, 0.55));
+      }
+
+      /* Down and up arrows */
+      .page-scroll {
+        -webkit-tap-highlight-color: transparent;
+        transition:
+          opacity 0.3s ease,
+          filter 0.3s ease;
+      }
+
+      .page-scroll:active {
+        filter: drop-shadow(0 0 9px rgba(246, 224, 138, 0.85));
+      }
+
+      .page-scroll i {
+        transition:
+          border-color 0.3s ease,
+          filter 0.3s ease;
+      }
+
+      .page-scroll:active i {
+        border-color: #fff1b8;
+        filter: drop-shadow(0 0 5px #d4af37);
+      }
+
+      /* Elegant golden keyboard focus */
+      a:focus-visible,
+      button:focus-visible {
+        outline: 1px solid var(--gold-light);
+        outline-offset: 5px;
+        box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
+      }
+
+      /* Remove unwanted default focus styling */
+      a:focus:not(:focus-visible),
+      button:focus:not(:focus-visible) {
+        outline: none;
+      }
+      /* Royal golden opening interaction */
+
+      #intro {
+        -webkit-tap-highlight-color: transparent;
+        transition:
+          opacity 1.2s ease,
+          visibility 1.2s ease;
+      }
+
+      /* Golden light expanding from the monogram */
+
+      #intro::after {
+        content: "";
+        position: absolute;
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(246, 224, 138, 0.2),
+          rgba(212, 175, 55, 0.08) 40%,
+          transparent 70%
+        );
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      #intro.exit::after {
+        animation: goldenReveal 1.2s ease-out forwards;
+      }
+
+      @keyframes goldenReveal {
+        0% {
+          transform: scale(0.3);
+          opacity: 0;
+        }
+
+        35% {
+          opacity: 1;
+        }
+
+        100% {
+          transform: scale(5);
+          opacity: 0;
+        }
+      }
     </style>
   </head>
   <body class="locked">
@@ -1493,6 +1597,30 @@
       // ---------- Opening screen ----------
       const bgMusic = document.getElementById("bgMusic");
 
+      // function closeIntro() {
+      //   if (
+      //     intro.classList.contains("done") ||
+      //     intro.classList.contains("exit")
+      //   )
+      //     return;
+
+      //   // Start background music on user's tap
+      //   bgMusic.volume = 0.45;
+
+      //   bgMusic.play().catch((error) => {
+      //     console.log("Music playback failed:", error);
+      //   });
+
+      //   // Close the opening screen
+      //   intro.classList.add("exit");
+
+      //   setTimeout(() => {
+      //     intro.classList.add("done");
+      //     document.body.classList.remove("locked");
+      //   }, 700);
+      // }
+
+      // intro.addEventListener("click", closeIntro);
       function closeIntro() {
         if (
           intro.classList.contains("done") ||
@@ -1500,14 +1628,26 @@
         )
           return;
 
-        // Start background music on user's tap
+        // Start background music
         bgMusic.volume = 0.45;
-
         bgMusic.play().catch((error) => {
           console.log("Music playback failed:", error);
         });
 
-        // Close the opening screen
+        // Golden fireworks reveal
+        if (!reducedMotion) {
+          setTimeout(() => {
+            firePopper(true);
+            firePopper(false);
+          }, 850);
+
+          setTimeout(() => {
+            firePopper(true);
+            firePopper(false);
+          }, 1250);
+        }
+
+        // Reveal invitation
         intro.classList.add("exit");
 
         setTimeout(() => {
@@ -1579,14 +1719,23 @@
       const confettiCanvas = document.getElementById("confetti");
       const cctx = confettiCanvas.getContext("2d");
       // Marigold, saffron, gold and rose, like flowers and coins at a Indian celebration
+      // const CONFETTI_COLORS = [
+      //   "#f4a300",
+      //   "#ff9933",
+      //   "#ffb84d",
+      //   "#d4af37",
+      //   "#f6e08a",
+      //   "#d7284f",
+      //   "#9e1b32"
+      // ];
+
       const CONFETTI_COLORS = [
-        "#f4a300",
-        "#ff9933",
-        "#ffb84d",
-        "#d4af37",
+        "#fff6c4",
         "#f6e08a",
-        "#d7284f",
-        "#9e1b32"
+        "#d4af37",
+        "#e8c766",
+        "#ffdf80",
+        "#c99a32"
       ];
       const PIECES_PER_POPPER = reducedMotion ? 30 : 110;
       let confetti = [];
