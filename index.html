@@ -1160,6 +1160,94 @@
         overflow: hidden;
         height: 100vh;
       }
+
+      .scroll-prompt {
+        position: absolute;
+        left: 50%;
+        bottom: 22px;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        color: var(--gold-light);
+        text-decoration: none;
+        transform: translateX(-50%);
+        opacity: 0.78;
+        transition:
+          opacity 0.35s ease,
+          visibility 0.35s ease;
+        animation: promptFade 3.2s ease-in-out infinite;
+      }
+      .scroll-prompt span {
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 0.58rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        white-space: nowrap;
+        text-shadow: 0 0 10px rgba(212, 175, 55, 0.22);
+      }
+      .scroll-prompt .prompt-arrows {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        line-height: 0.65;
+      }
+      .scroll-prompt .prompt-arrows i {
+        display: block;
+        width: 8px;
+        height: 8px;
+        border-right: 1px solid var(--gold);
+        border-bottom: 1px solid var(--gold);
+        transform: rotate(45deg);
+        animation: promptArrow 1.8s ease-in-out infinite;
+      }
+      .scroll-prompt .prompt-arrows i:nth-child(2) {
+        animation-delay: 0.18s;
+        opacity: 0.55;
+      }
+      .scroll-prompt:hover,
+      .scroll-prompt:focus-visible {
+        opacity: 1;
+        outline: none;
+      }
+      .scroll-prompt.is-hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      @keyframes promptArrow {
+        0%,
+        100% {
+          transform: translateY(-2px) rotate(45deg);
+          opacity: 0.35;
+        }
+        50% {
+          transform: translateY(4px) rotate(45deg);
+          opacity: 1;
+        }
+      }
+      @keyframes promptFade {
+        0%,
+        100% {
+          opacity: 0.62;
+        }
+        50% {
+          opacity: 0.95;
+        }
+      }
+      @media (max-height: 700px) {
+        .scroll-prompt {
+          bottom: 12px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .scroll-prompt,
+        .scroll-prompt .prompt-arrows i {
+          animation: none;
+        }
+      }
     </style>
   </head>
   <body class="locked">
@@ -1197,6 +1285,18 @@
         <span>Sunday &middot; 7 February 2027</span
         ><span class="scroll-cue" aria-hidden="true"></span>
       </p>
+      <a
+        class="scroll-prompt"
+        id="scroll-prompt"
+        href="#countdown-section"
+        aria-label="Scroll down to explore the invitation"
+      >
+        <!-- <span>Scroll to explore</span> -->
+        <span class="prompt-arrows" aria-hidden="true">
+          <i></i>
+          <i></i>
+        </span>
+      </a>
     </header>
 
     <main>
