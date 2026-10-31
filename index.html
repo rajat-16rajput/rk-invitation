@@ -515,19 +515,22 @@
 
       /* ---------- Footer ---------- */
       footer {
-        padding: 48px 24px 56px;
+        /* padding: 48px 24px 56px; */
+        margin-top: 2rem;
         text-align: center;
         border-top: 1px solid rgba(212, 175, 55, 0.25);
       }
 
       footer .monogram {
         font-family: "Italianno", cursive;
-        font-size: 2.6rem;
+        font-size: 2rem;
         color: var(--gold);
       }
 
       footer p {
-        font-size: 0.9rem;
+        margin-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        font-size: 1rem;
         color: var(--blush);
         opacity: 0.8;
       }
@@ -1217,6 +1220,42 @@
         visibility: hidden;
         pointer-events: none;
       }
+      .page-scroll {
+        position: absolute;
+        bottom: 22px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        z-index: 5;
+        color: var(--gold-light);
+        text-decoration: none;
+        animation: pageArrow 1.8s ease-in-out infinite;
+      }
+
+      .page-scroll i {
+        width: 13px;
+        height: 13px;
+        border-right: 2px solid var(--gold);
+        border-bottom: 2px solid var(--gold);
+        transform: rotate(45deg);
+      }
+      .page-scroll-up i {
+        transform: rotate(225deg);
+      }
+      @keyframes pageArrow {
+        0%,
+        100% {
+          opacity: 0.45;
+          translate: 0 -2px;
+        }
+        50% {
+          opacity: 1;
+          translate: 0 5px;
+        }
+      }
       @keyframes promptArrow {
         0%,
         100% {
@@ -1248,6 +1287,13 @@
           animation: none;
         }
       }
+      footer {
+        gap: 4px;
+      }
+
+      footer p {
+        margin: 0;
+      }
     </style>
   </head>
   <body class="locked">
@@ -1255,8 +1301,8 @@
     <div id="intro" aria-label="Opening screen. Tap to open.">
       <div class="intro-mono" aria-hidden="true">
         <span class="gold-text">R</span>
-        <span class="gold-text">&amp;</span>
-        <span class="gold-text">K</span>
+        <span class="gold-text">&amp; &nbsp;</span>
+        <span class="gold-text"> K</span>
       </div>
       <div class="intro-line" aria-hidden="true"></div>
       <p class="intro-sub">Tap to open</p>
@@ -1272,7 +1318,7 @@
     <canvas id="confetti" aria-hidden="true"></canvas>
 
     <!-- Hero -->
-    <header class="hero">
+    <header class="hero" id="hero">
       <img class="ganpati-icon" src="./ganpati.webp" alt="Ganpati" />
       <p class="hero-kicker reveal visible">Together with their families</p>
       <h1 class="hero-names gold-text">
@@ -1282,20 +1328,24 @@
         request the pleasure of your company<br />at their engagement
       </p>
       <p class="hero-date">
-        <span>Sunday &middot; 7 February 2027</span
-        ><span class="scroll-cue" aria-hidden="true"></span>
+        <span>Sunday &middot; 7 February 2027</span>
+        <!-- <span class="scroll-cue" aria-hidden="true"></span> -->
       </p>
-      <a
+      <!-- <a
         class="scroll-prompt"
         id="scroll-prompt"
         href="#countdown-section"
         aria-label="Scroll down to explore the invitation"
       >
         <!-- <span>Scroll to explore</span> -->
-        <span class="prompt-arrows" aria-hidden="true">
+      <!-- <span class="prompt-arrows" aria-hidden="true">
           <i></i>
           <i></i>
         </span>
+      </a>  -->
+      <a href="#countdown-section" class="page-scroll" aria-label="Scroll down">
+        <i></i>
+        <i></i>
       </a>
     </header>
 
@@ -1325,6 +1375,10 @@
         <p class="countdown-done" id="countdown-done" hidden>
           Today is the day!
         </p>
+        <a href="#story" class="page-scroll" aria-label="Scroll down">
+          <i></i>
+          <i></i>
+        </a>
       </section>
 
       <!-- Couple -->
@@ -1350,6 +1404,10 @@
           </button>
           <p class="celebrate-note" id="celebrate-note" aria-live="polite"></p>
         </div>
+        <a href="#venue" class="page-scroll" aria-label="Scroll down">
+          <i></i>
+          <i></i>
+        </a>
       </section>
 
       <!-- Venue -->
@@ -1364,6 +1422,10 @@
             >Get directions</a
           >
         </div>
+        <a href="#swing-photo" class="page-scroll" aria-label="Scroll down">
+          <i></i>
+          <i></i>
+        </a>
       </section>
       <!-- Swing photo -->
       <section class="section reveal" id="swing-photo">
@@ -1376,9 +1438,17 @@
         </div>
 
         <footer>
-          <p class="monogram">R &amp; K</p>
+          <!-- <p class="monogram">R&nbsp;&amp;&nbsp;&nbsp;K</p> -->
           <p>7 &middot; 02 &middot; 2027</p>
         </footer>
+        <a
+          href="#hero"
+          class="page-scroll page-scroll-up"
+          aria-label="Back to top"
+        >
+          <i></i>
+          <i></i>
+        </a>
       </section>
     </main>
 
